@@ -21,12 +21,14 @@ jobs:
   deploy:
     name: Deploy to VM
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, kikan-vm]
     steps:
-      - name: Deploy over SSH
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.VM_HOST }}
-          username: ${{ secrets.VM_DEPLOY_USER }}
-          key: ${{ secrets.VM_DEPLOY_KEY }}
-          script: deploy
+      - name: Pull, install, restart
+        run: |
+          cd ~/kikan-app
+          git pull origin main
+          npm install --omit=dev
+          export XDG_RUNTIME_DIR=/run/user/$(id -u)
+          systemctl --user restart kikan-app
+          sleep 2
+          systemctl --user is-active kikan-app
