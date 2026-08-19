@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+<h1>入出庫登録</h1>
+<form class="card" action="/stock" method="POST">
+  <label>商品</label>
+  <select name="product_id" required>
+    <% products.forEach(p => { %>
+    <option value="<%= p.id %>"><%= p.sku %> - <%= p.name %></option>
+    <% }) %>
+  </select>
+  <label>区分</label>
+  <select name="type" required>
+    <option value="in">入庫</option>
+    <option value="out">出庫</option>
+  </select>
+  <label>数量</label>
+  <input type="number" name="quantity" min="1" required>
+  <label>備考</label>
+  <input type="text" name="note">
+  <% if (error) { %><div class="error"><%= error %></div><% } %>
+  <div style="margin-top: 1rem;">
+    <button class="btn" type="submit">登録</button>
+  </div>
+</form>
+<%- include('../partials/footer') %>

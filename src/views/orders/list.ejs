@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+<div class="toolbar">
+  <h1>受注</h1>
+  <a class="btn" href="/orders/new">+ 新規受注</a>
+</div>
+
+<form method="GET" action="/orders" style="margin-bottom: 1rem;">
+  <select name="status" onchange="this.form.submit()">
+    <option value="" <%= statusFilter === '' ? 'selected' : '' %>>すべて</option>
+    <% ['受付', '処理中', '出荷済', 'キャンセル'].forEach(s => { %>
+    <option value="<%= s %>" <%= statusFilter === s ? 'selected' : '' %>><%= s %></option>
+    <% }) %>
+  </select>
+</form>
+
+<table>
+  <thead><tr><th>受注番号</th><th>顧客名</th><th>ステータス</th><th>受注日時</th><th></th></tr></thead>
+  <tbody>
+    <% orders.forEach(o => { %>
+    <tr>
+      <td><%= o.order_no %></td>
+      <td><%= o.customer_name %></td>
+      <td><span class="badge"><%= o.status %></span></td>
+      <td><%= new Date(o.created_at).toLocaleString('ja-JP') %></td>
+      <td><a href="/orders/<%= o.id %>">詳細</a></td>
+    </tr>
+    <% }) %>
+    <% if (orders.length === 0) { %>
+    <tr><td colspan="5">受注はまだありません</td></tr>
+    <% } %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

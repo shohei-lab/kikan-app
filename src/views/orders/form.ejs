@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+<h1>新規受注</h1>
+<form class="card" action="/orders" method="POST">
+  <label>顧客名</label>
+  <input type="text" name="customer_name" required>
+  <label>商品</label>
+  <select name="product_id" required>
+    <% products.forEach(p => { %>
+    <option value="<%= p.id %>"><%= p.sku %> - <%= p.name %> (<%= p.unit_price.toLocaleString() %>円)</option>
+    <% }) %>
+  </select>
+  <label>数量</label>
+  <input type="number" name="quantity" min="1" required>
+  <% if (error) { %><div class="error"><%= error %></div><% } %>
+  <div style="margin-top: 1rem;">
+    <button class="btn" type="submit">受注登録</button>
+  </div>
+</form>
+<%- include('../partials/footer') %>

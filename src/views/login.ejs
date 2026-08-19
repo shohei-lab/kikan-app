@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<div class="login-wrap">
+  <form class="card" action="/login" method="POST">
+    <h1>ログイン</h1>
+    <label>ユーザー名</label>
+    <input type="text" name="username" required autofocus>
+    <label>パスワード</label>
+    <input type="password" name="password" required>
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+    <div style="margin-top: 1rem;">
+      <button class="btn" type="submit">ログイン</button>
+    </div>
+  </form>
+</div>
+<%- include('partials/footer') %>

@@ -1,0 +1,17 @@
+<%- include('../partials/header') %>
+<h1><%= product && product.id ? '商品編集' : '商品登録' %></h1>
+<form class="card" action="<%= product && product.id ? '/products/' + product.id : '/products' %>" method="POST">
+  <label>SKU</label>
+  <input type="text" name="sku" value="<%= product ? product.sku : '' %>" required>
+  <label>商品名</label>
+  <input type="text" name="name" value="<%= product ? product.name : '' %>" required>
+  <label>単位</label>
+  <input type="text" name="unit" value="<%= product ? product.unit : '個' %>">
+  <label>単価(円)</label>
+  <input type="number" name="unit_price" value="<%= product ? product.unit_price : 0 %>" min="0" required>
+  <% if (error) { %><div class="error"><%= error %></div><% } %>
+  <div style="margin-top: 1rem;">
+    <button class="btn" type="submit">保存</button>
+  </div>
+</form>
+<%- include('../partials/footer') %>

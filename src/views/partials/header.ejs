@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在庫・受発注管理</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <% if (typeof username !== 'undefined' && username) { %>
+  <header class="topbar">
+    <div class="topbar-brand">在庫・受発注管理</div>
+    <nav class="topbar-nav">
+      <a href="/">ダッシュボード</a>
+      <a href="/products">商品マスタ</a>
+      <a href="/stock">在庫</a>
+      <a href="/orders">受注</a>
+    </nav>
+    <form action="/logout" method="POST" class="topbar-logout">
+      <span class="topbar-user"><%= username %></span>
+      <button type="submit">ログアウト</button>
+    </form>
+  </header>
+  <% } %>
+  <main class="container">

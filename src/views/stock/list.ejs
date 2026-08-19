@@ -1,0 +1,38 @@
+<%- include('../partials/header') %>
+<div class="toolbar">
+  <h1>在庫</h1>
+  <a class="btn" href="/stock/new">+ 入出庫登録</a>
+</div>
+
+<table style="margin-bottom: 1.5rem;">
+  <thead><tr><th>SKU</th><th>商品名</th><th>現在庫</th></tr></thead>
+  <tbody>
+    <% balances.forEach(b => { %>
+    <tr>
+      <td><%= b.sku %></td>
+      <td><%= b.name %></td>
+      <td><%= b.balance %> <%= b.unit %></td>
+    </tr>
+    <% }) %>
+    <% if (balances.length === 0) { %>
+    <tr><td colspan="3">商品が登録されていません</td></tr>
+    <% } %>
+  </tbody>
+</table>
+
+<h2 style="font-size: 1.05rem;">入出庫履歴(最新50件)</h2>
+<table>
+  <thead><tr><th>日時</th><th>商品</th><th>区分</th><th>数量</th><th>備考</th></tr></thead>
+  <tbody>
+    <% transactions.forEach(t => { %>
+    <tr>
+      <td><%= new Date(t.created_at).toLocaleString('ja-JP') %></td>
+      <td><%= t.product_name %></td>
+      <td><span class="badge"><%= t.type === 'in' ? '入庫' : '出庫' %></span></td>
+      <td><%= t.quantity %></td>
+      <td><%= t.note || '' %></td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
+<%- include('../partials/footer') %>

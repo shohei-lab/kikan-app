@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+<h1>ダッシュボード</h1>
+<div class="stat-grid">
+  <div class="stat-card"><div class="num"><%= productCount %></div><div class="label">登録商品数</div></div>
+  <div class="stat-card"><div class="num"><%= lowStockCount %></div><div class="label">在庫僅少(5未満)</div></div>
+  <div class="stat-card"><div class="num"><%= todayOrderCount %></div><div class="label">本日の受注件数</div></div>
+</div>
+
+<h2 style="font-size: 1.05rem;">直近の入出庫</h2>
+<table>
+  <thead><tr><th>日時</th><th>商品</th><th>区分</th><th>数量</th></tr></thead>
+  <tbody>
+    <% recentTransactions.forEach(t => { %>
+    <tr>
+      <td><%= new Date(t.created_at).toLocaleString('ja-JP') %></td>
+      <td><%= t.product_name %></td>
+      <td><span class="badge"><%= t.type === 'in' ? '入庫' : '出庫' %></span></td>
+      <td><%= t.quantity %></td>
+    </tr>
+    <% }) %>
+    <% if (recentTransactions.length === 0) { %>
+    <tr><td colspan="4">入出庫の記録はまだありません</td></tr>
+    <% } %>
+  </tbody>
+</table>
+<%- include('partials/footer') %>
