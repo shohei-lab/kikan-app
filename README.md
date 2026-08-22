@@ -29,3 +29,13 @@ npm install
 cp .env.example .env  # 値を設定
 npm run dev
 ```
+
+## fork/セルフホストする場合の注意
+
+`.github/workflows/deploy.yml` の CD ジョブは、このリポジトリ用に用意した VM 上のセルフホストランナー
+(`self-hosted`, `kikan-vm` ラベル)を前提にしています。fork した場合、アプリのコード自体は問題なく動きますが、
+自動デプロイを動かすには自分の環境に合わせてワークフローを書き換えるか、ランナーを別途用意してください。
+
+## License
+
+MIT License. 詳細は [LICENSE](./LICENSE) を参照してください。
