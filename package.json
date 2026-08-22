@@ -10,7 +10,7 @@
   "dependencies": {
     "@azure/identity": "^4.4.1",
     "@azure/keyvault-secrets": "^4.9.0",
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^3.0.3",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
