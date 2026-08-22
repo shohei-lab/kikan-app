@@ -3,6 +3,8 @@ name: CI/CD
 on:
   push:
     branches: ["main"]
+  pull_request:
+    branches: ["main"]
 
 jobs:
   build:
@@ -21,6 +23,7 @@ jobs:
   deploy:
     name: Deploy to VM
     needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: [self-hosted, kikan-vm]
     steps:
       - name: Pull, install, restart
