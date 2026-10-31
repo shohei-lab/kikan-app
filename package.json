@@ -8,7 +8,7 @@
     "dev": "node --watch src/app.js"
   },
   "dependencies": {
-    "@azure/identity": "^4.4.1",
+    "@azure/identity": "^4.14.1",
     "@azure/keyvault-secrets": "^4.9.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
